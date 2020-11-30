@@ -4,11 +4,11 @@
 <br>
 
 # SUMÁRIO
--[SOBRE O PROJETO](https://github.com/JoelFrancisco/projeto-final-IOT#sobre-o-projeto)
--[ESQUEMÁTICO](https://github.com/JoelFrancisco/projeto-final-IOT#esquem%C3%A1tico)
--[BIBLIOTECAS NECESSÁRIAS](https://github.com/JoelFrancisco/projeto-final-IOT#bibliotecas-necess%C3%A1rias)
--[CÓDIGO](https://github.com/JoelFrancisco/projeto-final-IOT#c%C3%B3digo)
--[APP no Blynk](https://github.com/JoelFrancisco/projeto-final-IOT#app-no-blynk)
+-[SOBRE O PROJETO](https://github.com/JoelFrancisco/projeto-final-IOT#sobre-o-projeto)<br>
+-[ESQUEMÁTICO](https://github.com/JoelFrancisco/projeto-final-IOT#esquem%C3%A1tico)<br>
+-[BIBLIOTECAS NECESSÁRIAS](https://github.com/JoelFrancisco/projeto-final-IOT#bibliotecas-necess%C3%A1rias)<br>
+-[CÓDIGO](https://github.com/JoelFrancisco/projeto-final-IOT#c%C3%B3digo)<br>
+-[APP NO BLYNK](https://github.com/JoelFrancisco/projeto-final-IOT#app-no-blynk)
 
 # SOBRE O PROJETO
 
@@ -621,7 +621,7 @@ No Void loop quando usado o Blynk APP ocorre boa parte da comunicação com o ap
 
 <br><br>
 
-# APP no Blynk
+# APP NO BLYNK
 
 Comece baixando o aplicativo e criando uma conta, após isso, crie um novo projeto. Nisso, será enviado no Email cadastrado o Token que deve ser colocado na programação do Arduino.
 
