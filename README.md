@@ -4,10 +4,11 @@
 <br>
 
 # SUMÁRIO
--[SOBRE O PROJETO]()
--[ESQUEMÁTICO](https://github.com/JoelFrancisco/projeto-final-IOT-SATC/blob/master/README.md#esquem%C3%A1tico)
--[CÓDIGO](https://github.com/JoelFrancisco/projeto-final-IOT-SATC/blob/master/README.md#esquem%C3%A1tico)
--[APP no Blynk](https://github.com/JoelFrancisco/projeto-final-IOT-SATC/blob/master/README.md#esquem%C3%A1tico)
+-[SOBRE O PROJETO](https://github.com/JoelFrancisco/projeto-final-IOT#sobre-o-projeto)
+-[ESQUEMÁTICO](https://github.com/JoelFrancisco/projeto-final-IOT#esquem%C3%A1tico)
+-[BIBLIOTECAS NECESSÁRIAS](https://github.com/JoelFrancisco/projeto-final-IOT#bibliotecas-necess%C3%A1rias)
+-[CÓDIGO](https://github.com/JoelFrancisco/projeto-final-IOT#c%C3%B3digo)
+-[APP no Blynk](https://github.com/JoelFrancisco/projeto-final-IOT#app-no-blynk)
 
 # SOBRE O PROJETO
 
@@ -104,7 +105,7 @@ Procure por Blynk e instale
 # CÓDIGO
 
 ## Definições iniciais do Blynk APP
-```arduino
+```c++
 // Blynk setup
 #define BLYNK_PRINT Serial
 
@@ -128,7 +129,7 @@ BlynkTimer timer;
 <br>
 Inicialmente temos a definição das informações de conexão do Blynk APP no monitor serial. Juntamente com a inclusão dos headers necessários para lidar com o ESP-01 como Shield do Arduino UNO.
 
-```arduino
+```c++
 #define BLYNK_PRINT Serial
 
 #include <ESP8266_Lib.h>
@@ -136,7 +137,7 @@ Inicialmente temos a definição das informações de conexão do Blynk APP no m
 ```
 Após isso temos o Token e as informações da rede WiFi.
 
-```arduino
+```c++
 char auth[] = "Seu token deve ser colado aqui";
 
 char ssid[] = "Coloque o nome da sua rede WiFi";
@@ -146,7 +147,7 @@ char pass[] = "Coloque a senha da sua rede WiFi";
 Seguido das configurações do Esp para com o Arduino
 OBS. Caso o ESP não responda tente mudar o valor no ESP8266_BAUD.
 
-```arduino
+```c++
 #include <SoftwareSerial.h>
 SoftwareSerial EspSerial(3, 4); // RX, TX
 
@@ -157,7 +158,7 @@ ESP8266 wifi(&EspSerial);
 
 Após temos a definição de um BlynkTimer que será utilizado posteriormente
 
-```arduino
+```c++
 BlynkTimer timer;
 ```
 
@@ -165,7 +166,7 @@ BlynkTimer timer;
 
 ## Definições iniciais do sensor HC-SR04
 
-```arduino
+```c++
 //HC-SR04 setup
 #include <Ultrasonic.h>
 
@@ -186,7 +187,7 @@ float sensor_hcsr04(){
 
 Inicialmente é incluída a biblioteca do sensor e definido os pinos.
 
-```arduino
+```c++
 #include <Ultrasonic.h>
 
 #define echo A4
@@ -195,13 +196,13 @@ Inicialmente é incluída a biblioteca do sensor e definido os pinos.
 
 Depois é instânciado um objeto do sensor ultrassônico, que herda da classe base vindo da bibliotecas
 
-```arduino
+```c++
 Ultrasonic ultrasonic(trig, echo);
 ```
 
 É criada uma função que retorna o valor do sensor HC-SR04
 
-```arduino
+```c++
 float sensor_hcsr04(){ 
   float valor_distancia;
   long micro = ultrasonic.timing();
@@ -215,7 +216,7 @@ float sensor_hcsr04(){
 
 ## Definições iniciais do buzzer
 
-```arduino
+```c++
 #define buzzer 5
 
 void ativar_buzzer(float valor_distancia){
@@ -235,7 +236,7 @@ void ativar_buzzer(float valor_distancia){
 
 ## Definições iniciais do LED_RGB
 
-```arduino
+```c++
 //LED RGB
 const int LED[3] = {11,12,13};
 
@@ -274,13 +275,13 @@ void controle_leds(float valor_distancia){
 
 Começamos definindo os pinos do LED RGB
 
-```arduino
+```c++
 const int LED[3] = {11,12,13};
 ```
 
 Depois temos funções com cada uma das três cores, semelhante a essa
 
-```arduino
+```c++
 void LED_RGB_blue(){
   digitalWrite(LED[0],HIGH);
   digitalWrite(LED[2],LOW);
@@ -290,7 +291,7 @@ void LED_RGB_blue(){
 
 Também há uma função que desliga o LED.
 
-```arduino
+```c++
 void LED_RGB_OFF(){
   digitalWrite(LED[0],LOW);
   digitalWrite(LED[2],LOW);
@@ -300,7 +301,7 @@ void LED_RGB_OFF(){
 
 Novamente uma função que recebe a distância como parâmetro, caso o valor seja menor que 30cm, o led ficará vermelho, menos que 50cm, pórem maior que 30cm, ficará azul, por fim, se for maior que 50cm, o led ficará verde.
 
-```arduino
+```c++
 void controle_leds(float valor_distancia){
   if (valor_distancia < 30) {
     LED_RGB_red();
@@ -316,7 +317,7 @@ void controle_leds(float valor_distancia){
 
 ## Definições iniciais do sensor DHT11
 
-```arduino
+```c++
 //Sensor DHT de temperatura
 #include "DHT.h"
 
@@ -341,7 +342,7 @@ float dht_umidade(){
 
 Primeiramente há a inclusão da biblioteca do DHT e as definições do pino e tipo de sensor.
 
-```arduino
+```c++
 #include "DHT.h"
 
 #define DHTPIN A3 
@@ -350,13 +351,13 @@ Primeiramente há a inclusão da biblioteca do DHT e as definições do pino e t
 
 Após isso temos a criação de uma instância da classe DHT proveniente da biblioteca.
 
-```arduino
+```c++
 DHT dht(DHTPIN, DHTTYPE);
 ```
 
 Funções que retornam a temperatura e a umidade.
 
-```arduino
+```c++
 float dht_temperatura(){
   float temperatura = dht.readTemperature();
   return temperatura;
@@ -370,7 +371,7 @@ float dht_umidade(){
 
 E a definição do led do DHT.
 
-```arduino
+```c++
 #define led_dht 6
 ```
 
@@ -378,7 +379,7 @@ E a definição do led do DHT.
 
 ## Definições do ON/OFF dos sensores
 
-```arduino
+```c++
 int hcsr04_on_off, dht11_on_off;
 ```
 
@@ -386,7 +387,7 @@ int hcsr04_on_off, dht11_on_off;
 
 ## Definições inicias do botão
 
-```arduino
+```c++
 //botão
 #define botao 2
 bool on_off_buzzer = true;
@@ -398,13 +399,13 @@ void evento_botao(){
 
 Há a definição do pino do botão de de uma variável booleana para o ON/OFF do buzzer.
 
-```arduino
+```c++
 #define botao 2
 bool on_off_buzzer = true;
 ```
 
 Após isso a função que será chamada na interrupção do botão.
-```arduino
+```c++
 void evento_botao(){
   on_off_buzzer = !on_off_buzzer;
 }
@@ -414,7 +415,7 @@ void evento_botao(){
 
 ## Função principal
 
-```arduino
+```c++
 void myTimerEvent(){  
   if(hcsr04_on_off){
     float distancia = sensor_hcsr04();
@@ -447,14 +448,14 @@ void myTimerEvent(){
 ```
  Inicialmente verifica-se se o sensor está ligado, logo que a variável hcsr04_on_off é verdadeira, é chamada a função que retorna o valor da distância e atribui esse valor a uma variável.
 
-```arduino
+```c++
   if(hcsr04_on_off){
     float distancia = sensor_hcsr04();
 ```
 
 Após isso é conferida a variável on_off_buzzer, se for verdadeira o buzzer deve ser ligado, do contrário não.
 
-```arduino
+```c++
     if(on_off_buzzer){
       ativar_buzzer(distancia);
     }
@@ -462,19 +463,19 @@ Após isso é conferida a variável on_off_buzzer, se for verdadeira o buzzer de
 
 É ligado o LED RGB.
 
-```arduino
+```c++
     controle_leds(distancia);
 ```
 
 Por fim é enviado pelo pino virtual 5(leia a documentação do Blynk APP) a informação para o APP.
 
-```arduino
+```c++
 Blynk.virtualWrite(V5, distancia);
 ```
 
 Caso o sensor esteja desligado, logo, a variável hcsr04_on_off for falsa, será mostrado o valor 0 e o LED é desligado.
 
-```arduino
+```c++
   } else {
     Blynk.virtualWrite(V5, 0);
     LED_RGB_OFF();
@@ -483,7 +484,7 @@ Caso o sensor esteja desligado, logo, a variável hcsr04_on_off for falsa, será
 
 Em geral a estrutura inicial é semelhante para o DHT11, com a verificação da variável que diz se o sensor está ligado e a atribuição dos valores do sensor em variáveis.
 
-```arduino
+```c++
   if(dht11_on_off){
     float temperatura = dht_temperatura();
     float umidade = dht_umidade();
@@ -491,20 +492,20 @@ Em geral a estrutura inicial é semelhante para o DHT11, com a verificação da 
 
 O LED de indicação é ligado.
 
-```arduino
+```c++
     digitalWrite(led_dht, HIGH);
 ```
 
 Os dados são enviados pelos pinos virtuais para o APP.
 
-```arduino
+```c++
     Blynk.virtualWrite(V4, temperatura);
     Blynk.virtualWrite(V3, umidade);
 ```
 
 Do contrário o valor enviado será 0 e o LED é desligado.
 
-```arduino
+```c++
   } else {
     Blynk.virtualWrite(V4, 0);
     Blynk.virtualWrite(V3, 0);
@@ -518,7 +519,7 @@ Do contrário o valor enviado será 0 e o LED é desligado.
 
 ## Conseguindo os dados provenientes do APP
 
-```arduino
+```c++
 BLYNK_WRITE(V1){
   hcsr04_on_off = param.asInt(); 
 }
@@ -534,7 +535,7 @@ Recebimento dos dados e atribuição de variáveis.
 
 ## Void setup
 
-```arduino
+```c++
 void setup(){
   //buzzer
   pinMode(buzzer, OUTPUT);
@@ -565,7 +566,7 @@ void setup(){
 
 Definição dos pinos do buzzer e LEDs como OUTPUT
 
-```arduino
+```c++
   //buzzer
   pinMode(buzzer, OUTPUT);
 
@@ -580,7 +581,7 @@ Definição dos pinos do buzzer e LEDs como OUTPUT
 
 Iniciação da Serial, da instância do DHT, da comunicação com o ESP e o Blynk.
 
-```arduino
+```c++
   //início serial
   Serial.begin(9600);
 
@@ -594,13 +595,13 @@ Iniciação da Serial, da instância do DHT, da comunicação com o ESP e o Blyn
 
 Definição da interrupção do botão.
 
-```arduino
+```c++
   attachInterrupt(0,evento_botao,CHANGE);
 ```
 
 Definição do timer do Blynk. 
 
-```arduino
+```c++
   timer.setInterval(1000L, myTimerEvent);
 }
 ```
@@ -609,7 +610,7 @@ Definição do timer do Blynk.
 
 ## Void loop
 
-```arduino
+```c++
 void loop(){
   Blynk.run();
   timer.run(); 
