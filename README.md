@@ -39,6 +39,7 @@ Leia a documentação: [aqui](https://blynk.io/en/getting-started)
 
 * Arduino Uno
 * ESP-01
+* ESP-01 Adapter(o esquemático não está utilizando o adaptador)
 * DHT11
 * HC-SR04
 * Buzzer
